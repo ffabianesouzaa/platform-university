@@ -1,26 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma</title>
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
+<style>
+    ::-webkit-scrollbar {
+        width: 5px;
+        border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #8a8a89;
+        border-radius: 6px;
+    }
+
+    textarea:focus,
+    input:focus {
+        outline: none;
+    }
+</style>
+
 <body>
     <div class="container">
-        <nav> 
-            <ul>
-                <li>
-                    <a href="index.html">Sobre</a>
-                </li>
-                <li>
-                    <a href="project.html">Conceitos</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="intro">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html">Sobre</a>
+                    </li>
+                    <li>
+                        <a href="project.html">Conceitos</a>
+                    </li>
+                </ul>
+            </nav>
             <h3>Bem-vindo a</h3>
             <h1>Plataforma</h1>
+            <p>Aqui estará uma frase sobre a plataforma após eu delimitar a pesquisa escrita.</p>
+        </div>
+        <div class="campus">
+            <h3>Comece sua jornada</h3>
+            <p>Selecione um campus da UTFPR para visualizar as vagas de emprego ofertadas pelo SINE.</p>
+            <div class="campi">
+                <div class="city">Apucarana</div>
+                <div class="city">Campo Mourão</div>
+                <div class="city">Cornélio Procópio</div>
+                <div class="city">Curitiba</div>
+                <div class="city">Dois Vizinhos</div>
+                <div class="city">Francisco Beltrão</div>
+                <div class="city">Guarapuava</div>
+                <div class="city">Londrina</div>
+                <div class="city">Medianeira</div>
+                <div class="city">Pato Branco</div>
+                <div class="city">Ponta Grossa</div>
+                <div class="city">Santa Helena</div>
+                <div class="city">Toledo</div>
+            </div>
+        </div>
+        <div class="ocupations">
+            <h3>Explore as vagas de emprego e skills</h3>
+            <p>Pesquise ou selecione uma ocupação para visualizar mais detalhes.</p>
+            <div class="search">
+                <div class="search-bar">
+                    <input type="text" id="text-search" />
+                    <button id="btn-search"><img src="./img/search-icon.svg"></img></button>
+                </div>
+            </div>
+            <div class="rectangle">
+                <div class="ocup">
+                    <span class="item"><button>Abatedor</button></span>
+                    <span class="item"><button>Acabador de calçados</button></span>
+                    <span class="item"><button>Acabador de embalagens (flexíveis e cartotécnicas)</button></span>
+                    <span class="item"><button>Acabador de superfícies de concreto</button></span>
+                    <span class="item"><button>Açougueiro</button></span>
+                    <span class="item"><button>Acrobata</button></span>
+                    <span class="item"><button>Adestrador de animais</button></span>
+                    <span class="item"><button>Administrador</button></span>
+                    <span class="item"><button>Administrador de banco de dados</button></span>
+                    <span class="item"><button>Administrador de edifícios</button></span>
+                    <span class="item"><button>Administrador de fundos e carteiras de investimento</button></span>
+                    <span class="item"><button>Administrador de redes</button></span>
+                    <span class="item"><button>Administrador de sistemas operacionais</button></span>
+                    <span class="item"><button>Administrador em segurança da informação</button></span>
+                    <span class="item"><button>Advogado</button></span>
+                    <span class="item"><button>Advogado (áreas especiais)</button></span>
+                    <span class="item"><button>Advogado (direito civil)</button></span>
+                    <span class="item"><button>Advogado (direito do trabalho)</button></span>
+                    <span class="item"><button>Advogado (direito penal)</button></span>
+                    <span class="item"><button>Advogado (direito público)</button></span>
+                    <span class="item"><button>Advogado da união</button></span>
+                    <span class="item"><button>Advogado de empresa</button></span>
+                    <span class="item"><button>Afiador de cardas</button></span>
+                    <span class="item"><button>Afiador de cutelaria</button></span>
+                    <span class="item"><button>Afiador de ferramentas</button></span>
+                    <span class="item"><button>Afiador de serras</button></span>
+                    <span class="item"><button>Afinador de instrumentos musicais</button></span>
+                    <span class="item"><button>Afretador</button></span>
+                    <span class="item"><button>Agenciador de propaganda</button></span>
+                    <span class="item"><button>Agente comunitário de saúde</button></span>
+                    <span class="item"><button>Agente de ação social</button></span>
+                    <span class="item"><button>Agente de combate às endemias</button></span>
+                    <span class="item"><button>Agente de defesa ambiental</button></span>
+                    <span class="item"><button>Agente de direitos autorais</button></span>
+                    <span class="item"><button>Agente de estação (ferrovia e metrô)</button></span>
+                    <span class="item"><button>Agente de higiene e segurança</button></span>
+                    <span class="item"><button>Agente de inteligência</button></span>
+                    <span class="item"><button>Agente de manobra e docagem</button></span>
+                    <span class="item"><button>Agente de microcrédito</button></span>
+                    <span class="item"><button>Agente de higiene e segurança</button></span>
+                    <span class="item"><button>Agente de inteligência</button></span>
+                    <span class="item"><button>Agente de manobra e docagem</button></span>
+                    <span class="item"><button>Agente de microcrédito</button></span>
+                    <span class="item"><button>Agente de higiene e segurança</button></span>
+                    <span class="item"><button>Agente de inteligência</button></span>
+                    <span class="item"><button>Agente de manobra e docagem</button></span>
+                    <span class="item"><button>Agente de microcrédito</button></span>
+                </div>
+            </div>
+        </div>
+        <div class="ocup-bar">
+            <h3><strong>Termômetro de vagas de emprego</strong></h3>
+            <p>As vagas ocupadas foram preenchidas, enquanto que as não ocupadas estavam em aberto no período de 2022 a
+                2023.</p>
+            <div class="bar">
+                <div class="ocupadas" style="width: 80%;">Ocupadas</div>
+                <div class="ofertadas" style="width: 20%;">Não ocupadas</div>
+            </div>
+        </div>
+        <div class="skills">
+            <div class="skills-container">
+                <p><strong>Hard Skills</strong></p>
+                <ul>
+                    <li>Conhecimentos em Engenharia</li>
+                    <li>Inglês avançado</li>
+                    <li>Ferramentas web</li>
+                </ul>
+            </div>
+            <div class="skills-container">
+                <p><strong>Soft Skills</strong></p>
+                <ul>
+                    <li>Trabalho em equipe</li>
+                    <li>Empatia</li>
+                    <li>Flexibilidade</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
