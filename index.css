@@ -13,17 +13,14 @@ body {
     padding: 5px;
 }
 
-/* link que foi visitado */
 .intro a:visited {
     color: rgb(0, 0, 0);
 }
 
-/* link que ainda não foi visitado */
 .intro a:link {
     color: rgb(0, 0, 0);
 }
 
-/* mouse over */
 .intro a:hover {
     color: #000000;
 }
@@ -201,7 +198,7 @@ body {
 
 .skills-container {
     flex: 1;
-    height: 200px;
+    height: 150px;
     padding: 10px;
     padding-bottom: 3px;
 }
@@ -213,4 +210,21 @@ body {
 
 .skills-container li {
     font-size: 14px;
+}
+
+footer {
+    font-size: 12px;
+    text-align: center;
+}
+
+footer a:link {
+    color: rgb(0, 0, 0);
+}
+
+footer a:visited {
+    color: rgb(0, 0, 0);
+}
+
+footer a:hover {
+    color: #000000;
 }
