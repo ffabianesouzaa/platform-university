@@ -1,0 +1,42 @@
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    padding: 0px 50px;
+    font-size: 20px;
+}
+
+a:visited {
+    color: rgb(0, 0, 0);
+}
+
+a:link {
+    color: rgb(0, 0, 0);
+}
+
+a:hover {
+    color: #000000;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 50px;
+    margin: 0;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0;
+}
+
+p {
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+}
