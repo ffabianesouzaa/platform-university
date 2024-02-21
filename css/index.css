@@ -55,6 +55,10 @@
     margin: 10px;
 }
 
+.city button:hover {
+    background-color: #6d6d6d;;
+}
+
 .ocupations h3 {
     font-weight: 500;
     font-size: 18px;
@@ -101,6 +105,10 @@
     background: white;
     border: 1px solid #6d6d6d;
     border-radius: 4px;
+}
+
+.item button:hover {
+    background-color: #6d6d6d;;
 }
 
 .rectangle {
