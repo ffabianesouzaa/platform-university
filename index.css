@@ -55,7 +55,7 @@ body {
     font-weight: 500;
     font-size: 18px;
     margin: 0;
-    padding-top: 30px;
+    padding-top: 50px;
 }
 
 .campus p {
@@ -95,6 +95,7 @@ body {
     align-items: center;
     border: solid 1px #6d6d6d;
     border-radius: 5px;
+    margin-bottom: 1px;
 }
 
 #text-search {
