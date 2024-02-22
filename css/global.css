@@ -1,5 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: "Montserrat", sans-serif;
+    margin: 0;
 }
 
 a {
@@ -7,7 +12,7 @@ a {
 }
 
 .container {
-    padding: 0px 50px;
+    /* padding: 0px 50px; */
     font-size: 20px;
 }
 
@@ -39,4 +44,12 @@ p {
     font-weight: 400;
     font-size: 15px;
     margin: 0;
+}
+
+.content {
+    padding: 50px;
+}
+
+.content.grey {
+    background-color: #f1f1f1;
 }

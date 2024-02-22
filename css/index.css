@@ -1,3 +1,7 @@
+.intro.content {
+    padding-top: 0;
+}
+
 .intro a {
     font-size: 15px;
     padding: 5px;
@@ -33,7 +37,6 @@
     font-weight: 500;
     font-size: 18px;
     margin: 0;
-    padding-top: 50px;
 }
 
 .campus p {
@@ -43,55 +46,71 @@
 }
 
 .campi {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
+    display: grid;
+    grid-gap: 8px;
+    padding: 16px 0;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 50px 50px;
 }
 
 .city {
     text-align: center;
-    padding-top: 10px;
     font-weight: 400;
     font-size: 13px;
-    margin: 10px;
+}
+
+.city button {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cac8c8;
+    border-radius: 6px;
+    transition: background-color ease 150ms, color ease 150ms, border-color ease 150ms;
 }
 
 .city button:hover {
-    background-color: #6d6d6d;;
+    /* background-color: #f7f5f5; */
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
 }
 
 .ocupations h3 {
     font-weight: 500;
     font-size: 18px;
     margin: 0;
-    padding-top: 30px;
+    padding-bottom: 4px;
 }
 
 .ocupations p {
     font-weight: 400;
     font-size: 15px;
     margin: 0;
+    padding-bottom: 24px;
 }
 
 .search-bar {
     display: flex;
-    align-items: center;
     border: solid 1px #6d6d6d;
-    border-radius: 5px;
-    margin-bottom: 1px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    height: 40px;
 }
 
 #text-search {
-    border: none;
-    padding-left: 5px;
+    border: 0;
+    padding: 8px 12px;
     flex: 1;
+    height: 100%;
 }
 
 #btn-search {
-    border: none;
-    height: 30px;
+    border: 0;
+    height: 100%;
     width: 50px;
     background: #6d6d6d;
-    border-radius: 0 4px 4px 0;
 }
 
 #btn-search img {
@@ -100,22 +119,29 @@
     background: #6d6d6d;
 }
 
+.rectangle {
+    height: 150px;
+    border-radius: 0 0 5px 5px;
+    border: 1px solid #6d6d6d;
+    border-top: 0;
+    overflow: auto;
+    padding: 12px 4px;
+}
+
 .item button {
     font-size: 12px;
     background: white;
     border: 1px solid #6d6d6d;
     border-radius: 4px;
+    padding: 8px 12px;
+    transition: background-color ease 150ms, color ease 150ms, border-color ease 150ms;
 }
 
 .item button:hover {
-    background-color: #6d6d6d;;
-}
-
-.rectangle {
-    height: 150px;
-    border-radius: 5px;
-    border: 1px solid #6d6d6d;
-    overflow: auto;
+    /* background-color: #6d6d6d; */
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
 }
 
 .ocup {
@@ -129,27 +155,29 @@
 }
 
 .ocup-bar {
-    display: flex;
+    text-align: center;
+    /* display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;   */
 }
 
 .ocup-bar p {
     font-weight: 400;
     font-size: 15px;
     margin: 0;
+    padding-bottom: 16px;
 }
 
 .ocup-bar h3 {
     font-weight: 500;
     font-size: 15px;
     text-align: center;
-    padding-right: 20px;
     margin: 0;
+    padding-bottom: 20px;
 }
 
 .bar {    
-    width: 1100px;
+    width: 100%;
     height: 50px;
     border-radius: 10px;
     margin: 20px auto;
@@ -202,6 +230,7 @@
 footer {
     font-size: 12px;
     text-align: center;
+    padding: 8px 0;
 }
 
 footer a {
