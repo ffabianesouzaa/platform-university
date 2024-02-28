@@ -66,12 +66,17 @@
     border: 1px solid #cac8c8;
     border-radius: 6px;
     transition: background-color ease 150ms, color ease 150ms, border-color ease 150ms;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2), 0 6px 12px 0 rgba(0,0,0,0.19);
 }
 
 .city button:hover {
     background-color: #000000;
     color: #ffffff;
     border-color: #000000;
+}
+
+.disable {
+    opacity: 0.6;
 }
 
 .ocupations h3 {
