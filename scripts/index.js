@@ -14,18 +14,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const data = await fetch('http://127.0.0.1:8000/list/campi/ocup/' + campi.id, {
       method: 'GET'
     })
-      .then((res) => res.json())
+      .then((res) => res.json()) 
       .then((data) => data)
       .catch((error) => console.log(error))
 
     console.log(data)
 
-    data.forEach((vaga) => {
+    data.rows.forEach((vaga) => {
       const element = `
-        <span class="item" id="${vaga['CodCBO']}"><button>${vaga['Ocupação']}</button></span>
+        <span class="item" id="${vaga}"><button>${vaga}</button></span>
       `
       ocupacoesContainer.innerHTML += element
+
     })
+
+    document.querySelector('#bar-ocupadas').style.width = `${data.ocupadas}`
+    const total = data.ocupadas + data.nocupadas
+    const percentageOcupadas = (data.ocupadas * 100) / total
+    const percentageNocupadas = 100 - percentageOcupadas
+
+    const barOcupadas = document.querySelector('#bar-ocupadas')
+    const barNocupadas = document.querySelector('#bar-nocupadas')
+
+    barOcupadas.style.width = `${percentageOcupadas}%`
+    barNocupadas.style.width = `${percentageNocupadas}%`
+
   }
 
   campiButtons.forEach((button) => button.addEventListener('click', handleCampiButtonClick))
