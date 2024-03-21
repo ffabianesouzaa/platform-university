@@ -185,11 +185,36 @@
     margin: 0;
 }
 
-.bar {    
+.bar-wrapper {
     width: 1100px;
+    overflow: hidden;
+}
+
+.bar-labels {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.ocupadas-label,
+.nocupadas-label {
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    width: 50%;
+}
+
+.ocupadas-label {
+    color:#000000;
+}
+
+.nocupadas-label {
+    color:#6d6d6d;
+}
+
+.bar {    
     height: 50px;
     border-radius: 10px;
-    margin: 20px auto;
     display: flex;
     align-items: center;
     font-size: 12px;
@@ -205,17 +230,8 @@
     line-height: 50px;
     color: white;
     z-index: 1;
+    width: 50%;
 }
-
-/* .ocupadas::before {
-    content: "Ocupadas";
-    display: block;
-    position: absolute;
-    top: -35px;
-    right: 0;
-    color: black;
-    transform: translateX(50%);
-} */
 
 .ofertadas {
     height: 100%;
@@ -224,17 +240,16 @@
     line-height: 50px;
     color: white;
     z-index: 1;
+    width: 50%;
 }
 
 .skills {
     display: flex;
-    justify-content: space-between;
     padding: 50px;
 }
 
 .skills-container {
     flex: 1;
-    height: 150px;
     padding: 10px;
     padding-bottom: 3px;
 }
@@ -245,7 +260,8 @@
 }
 
 .skills-container li {
-    font-size: 14px;
+    padding-top: 10px;
+    font-size: 12px;
 }
 
 footer {

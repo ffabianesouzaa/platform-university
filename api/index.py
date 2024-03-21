@@ -54,7 +54,12 @@ def list_campi_ocup(campi, ocupacoes):
     ''', (campi, ocupacoes)).fetchall()
     resultsNocupadas = nocupadas[0][0]
     
+    hard = db.execute('''
+        SELECT DISTINCT DesHabilidade FROM Hard WHERE Ocupação = ?
+    ''', (ocupacoes,)).fetchall()
+    resultsHard = [row[0] for row in hard]
+        
     conn.commit()
     conn.close()
     
-    return { 'ocupadas': resultsOcupadas, 'nocupadas': resultsNocupadas }
+    return { 'ocupadas': resultsOcupadas, 'nocupadas': resultsNocupadas, 'hard': resultsHard }

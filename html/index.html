@@ -83,27 +83,23 @@
             <h3><strong>Termômetro de vagas de emprego</strong></h3>
             <p>As vagas ocupadas foram preenchidas, enquanto que as não ocupadas estavam em aberto no período de 2022 a
                 2023.</p>
-            <div class="bar">
-                <div class="ocupadas" id="bar-ocupadas" style="width: 80%;">Ocupadas</div>
-                <div class="ofertadas" id="bar-nocupadas" style="width: 20%;">Não ocupadas</div>
+            <div class="bar-wrapper">
+                <div class="bar-labels">
+                    <span class="ocupadas-label" id="ocupadas-label">Ocupadas</span>
+                    <span class="nocupadas-label" id="nocupadas-label">Não ocupadas</span>
+                </div>
+                <div class="bar">
+                    <div class="ocupadas" id="bar-ocupadas"></div>
+                    <div class="ofertadas" id="bar-nocupadas"></div>
+                </div>
             </div>
         </div>
         <div class="skills">
             <div class="skills-container">
-                <p><strong>Hard Skills</strong></p>
-                <ul>
-                    <li>Conhecimentos em Engenharia</li>
-                    <li>Inglês avançado</li>
-                    <li>Ferramentas web</li>
-                </ul>
-            </div>
-            <div class="skills-container">
-                <p><strong>Soft Skills</strong></p>
-                <ul>
-                    <li>Trabalho em equipe</li>
-                    <li>Empatia</li>
-                    <li>Flexibilidade</li>
-                </ul>
+                <p><strong>Skills relacionadas a essa ocupação</strong></p>
+                <div class="description" id="hard">
+                    <ul></ul>
+                </div>
             </div>
         </div>
         <footer>Dados utilizados nesse plataforma foram obtidos através Lei de Acesso à Informação (LAI), por meio do

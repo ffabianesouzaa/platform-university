@@ -7,9 +7,18 @@ document.addEventListener('DOMContentLoaded', function () {
     ocupButton.classList.add('active')
     console.log(ocupButton)
 
+    const hardSkills = document.querySelector('#hard')
+    hardSkills.innerHTML = ''
+
+    const barOcupadas = document.querySelector('#bar-ocupadas')
+    const barNocupadas = document.querySelector('#bar-nocupadas')
+
+    const barLabelOcupadas = document.querySelector('#ocupadas-label')
+    const barLabelNocupadas = document.querySelector('#nocupadas-label')
+
     const campiId = ocupButton.getAttribute('data-campi-id')
 
-    const data = await fetch(`http://127.0.0.1:8000/list/campi/ocup/total/${campiId}/${ocupButton.id}`, {
+    const data = await fetch(`http://127.0.0.1:8000/list/campi/ocup/total/${campiId}/${ocupButton.id}/`, {
       method: 'GET'
     })
       .then((res) => res.json())
@@ -22,11 +31,32 @@ document.addEventListener('DOMContentLoaded', function () {
     const percentageOcupadas = (data.ocupadas * 100) / total
     const percentageNocupadas = 100 - percentageOcupadas
 
-    const barOcupadas = document.querySelector('#bar-ocupadas')
-    const barNocupadas = document.querySelector('#bar-nocupadas')
+    
 
     barOcupadas.style.width = `${percentageOcupadas}%`
     barNocupadas.style.width = `${percentageNocupadas}%`
+
+    if (percentageOcupadas < 1) {
+      barLabelOcupadas.style.display = 'none'
+    } 
+    else {
+      barLabelOcupadas.style.display = 'block'
+    }
+
+    if (percentageNocupadas < 1) {
+      barLabelNocupadas.style.display = 'none'
+    } 
+    else {
+      barLabelNocupadas.style.display = 'block'
+    }
+
+    barLabelOcupadas.style.width = `${percentageOcupadas}%`
+    barLabelNocupadas.style.width = `${percentageNocupadas}%`
+
+    barOcupadas.innerHTML = data.ocupadas
+    barNocupadas.innerHTML = data.nocupadas
+
+    hardSkills.innerHTML = data.hard.map((skill) => `<li>${skill}</li>`).join('');
 
   }
 
@@ -34,6 +64,15 @@ document.addEventListener('DOMContentLoaded', function () {
   async function handleCampiButtonClick(event) {
     const ocupacoesContainer = document.querySelector('#ocupacoes')
     ocupacoesContainer.innerHTML = ''
+    const hardSkills = document.querySelector('#hard')
+    hardSkills.innerHTML = ''
+
+    const barOcupadas = document.querySelector('#bar-ocupadas')
+    const barNocupadas = document.querySelector('#bar-nocupadas')
+
+    const barLabelOcupadas = document.querySelector('#ocupadas-label')
+    const barLabelNocupadas = document.querySelector('#nocupadas-label')
+        
     let ocupButtons = document.querySelectorAll('#ocupacoes button')
     if (ocupButtons.length) {
       ocupButtons.forEach((button) => button.removeEventListener('click', handleOcupButtonClick)) 
@@ -65,12 +104,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const percentageOcupadas = (data.ocupadas * 100) / total
     const percentageNocupadas = 100 - percentageOcupadas
 
-    const barOcupadas = document.querySelector('#bar-ocupadas')
-    const barNocupadas = document.querySelector('#bar-nocupadas')
+    
 
     barOcupadas.style.width = `${percentageOcupadas}%`
     barNocupadas.style.width = `${percentageNocupadas}%`
+
+    if (percentageOcupadas < 1) {
+      barLabelOcupadas.style.display = 'none'
+    } 
+    else {
+      barLabelOcupadas.style.display = 'block'
+    }
+
+    if (percentageNocupadas < 1) {
+      barLabelNocupadas.style.display = 'none'
+    } 
+    else {
+      barLabelNocupadas.style.display = 'block'
+    }
+
+    barLabelOcupadas.style.width = `${percentageOcupadas}%`
+    barLabelNocupadas.style.width = `${percentageNocupadas}%`
     
+    barOcupadas.innerHTML = data.ocupadas
+    barNocupadas.innerHTML = data.nocupadas
+
     ocupButtons = document.querySelectorAll('#ocupacoes button')
     ocupButtons.forEach((button) => button.addEventListener('click', handleOcupButtonClick))
   }
