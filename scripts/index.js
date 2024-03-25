@@ -31,21 +31,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const percentageOcupadas = (data.ocupadas * 100) / total
     const percentageNocupadas = 100 - percentageOcupadas
 
-    
+
 
     barOcupadas.style.width = `${percentageOcupadas}%`
     barNocupadas.style.width = `${percentageNocupadas}%`
 
     if (percentageOcupadas < 1) {
       barLabelOcupadas.style.display = 'none'
-    } 
+    }
     else {
       barLabelOcupadas.style.display = 'block'
     }
 
     if (percentageNocupadas < 1) {
       barLabelNocupadas.style.display = 'none'
-    } 
+    }
     else {
       barLabelNocupadas.style.display = 'block'
     }
@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const barLabelOcupadas = document.querySelector('#ocupadas-label')
     const barLabelNocupadas = document.querySelector('#nocupadas-label')
-        
+
     let ocupButtons = document.querySelectorAll('#ocupacoes button')
     if (ocupButtons.length) {
-      ocupButtons.forEach((button) => button.removeEventListener('click', handleOcupButtonClick)) 
+      ocupButtons.forEach((button) => button.removeEventListener('click', handleOcupButtonClick))
     }
     campiButtons.forEach((button) => button.classList.remove('active'))
 
@@ -104,28 +104,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const percentageOcupadas = (data.ocupadas * 100) / total
     const percentageNocupadas = 100 - percentageOcupadas
 
-    
-
     barOcupadas.style.width = `${percentageOcupadas}%`
     barNocupadas.style.width = `${percentageNocupadas}%`
 
     if (percentageOcupadas < 1) {
       barLabelOcupadas.style.display = 'none'
-    } 
+    }
     else {
       barLabelOcupadas.style.display = 'block'
     }
 
     if (percentageNocupadas < 1) {
       barLabelNocupadas.style.display = 'none'
-    } 
+    }
     else {
       barLabelNocupadas.style.display = 'block'
     }
 
     barLabelOcupadas.style.width = `${percentageOcupadas}%`
     barLabelNocupadas.style.width = `${percentageNocupadas}%`
-    
+
     barOcupadas.innerHTML = data.ocupadas
     barNocupadas.innerHTML = data.nocupadas
 

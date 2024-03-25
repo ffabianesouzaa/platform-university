@@ -254,14 +254,27 @@
     padding-bottom: 3px;
 }
 
+.skills-container h3 {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0;
+    padding-bottom: 4px;
+}
+
 .skills-container p {
-    text-align: left;
+    font-weight: 400;
     font-size: 15px;
+    margin: 0;
+    padding-bottom: 24px;
 }
 
 .skills-container li {
     padding-top: 10px;
     font-size: 12px;
+}
+
+.description {
+    columns: 100px 2;
 }
 
 footer {
