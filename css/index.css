@@ -80,6 +80,18 @@
     opacity: 0.6;
 }
 
+.top5 h3 {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0;
+}
+
+.top5 p {
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+}
+
 .ocupations h3 {
     font-weight: 500;
     font-size: 18px;
@@ -92,35 +104,6 @@
     font-size: 15px;
     margin: 0;
     padding-bottom: 24px;
-}
-
-.search-bar {
-    display: flex;
-    border: solid 1px #6d6d6d;
-    border-radius: 5px 5px 0 0;
-    overflow: hidden;
-    height: 40px;
-    margin: 1px;
-}
-
-#text-search {
-    border: 0;
-    padding: 8px 12px;
-    flex: 1;
-    height: 100%;
-}
-
-#btn-search {
-    border: 0;
-    height: 100%;
-    width: 50px;
-    background: #6d6d6d;
-}
-
-#btn-search img {
-    height: 25px;
-    width: 25px;
-    background: #6d6d6d;
 }
 
 .rectangle {
