@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+  //Ao clicar em um botão
   async function handleOcupButtonClick(event) {
     const ocupButtons = document.querySelectorAll('#ocupacoes button')
     ocupButtons.forEach((button) => button.classList.remove('active'))
