@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
+    // Retorna o top 5 ocupadas e preenche na visualização
     data.topOcup.forEach((ocup) => {
       const element = `
         <div class="top-ocup-item">
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
+    // Retorna o top 5 não ocupadas e preenche na visualização
     data.topNocup.forEach((ocup) => {
       const element = `
         <div class="top-ocup-item">
