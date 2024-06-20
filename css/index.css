@@ -80,10 +80,19 @@
     opacity: 0.6;
 }
 
+.top5 {
+    display: grid;
+    grid-gap: 8px;
+    padding: 16px 0;
+    grid-template-columns: repeat(2, 1fr);
+    
+}
+
 .top5 h3 {
     font-weight: 500;
     font-size: 18px;
     margin: 0;
+    margin-top: 10px;
 }
 
 .top5 p {
@@ -91,6 +100,43 @@
     font-size: 15px;
     margin: 0;
 }
+
+.top-ocup-item {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 13px;
+  }
+    
+  .top-ocup-item .top-ocup-badge {
+    position: right;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #A7CEA1;
+    color: #000000;
+    font-weight: 400;
+    font-size: 10px;
+  }
+
+  .top-ocup-item .top-nocup-badge {
+    position: right;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #FFC999;
+    color: #000000;
+    font-weight: 400;
+    font-size: 10px;
+  }
 
 .ocupations h3 {
     font-weight: 500;
@@ -109,7 +155,7 @@
 .rectangle {
     height: 150px;
     border-radius: 0 0 5px 5px;
-    border: 1px solid #6d6d6d;
+    border: 1px solid #c5c5c5;
     border-top: 0;
     overflow: auto;
     padding: 12px 4px;
@@ -118,7 +164,7 @@
 .item button {
     font-size: 12px;
     background: white;
-    border: 1px solid #6d6d6d;
+    border: 1px solid #c5c5c5;
     border-radius: 4px;
     padding: 8px 12px;
     transition: background-color ease 150ms, color ease 150ms, border-color ease 150ms;
@@ -134,7 +180,7 @@
 .rectangle {
     height: 150px;
     border-radius: 5px;
-    border: 1px solid #6d6d6d;
+    border: 1px solid #c5c5c5;
     overflow: auto;
 }
 
@@ -188,11 +234,11 @@
 }
 
 .ocupadas-label {
-    color:#000000;
+    color: #000000;
 }
 
 .nocupadas-label {
-    color:#6d6d6d;
+    color:#000000;
 }
 
 .bar {    
@@ -208,20 +254,20 @@
 .ocupadas {
     position: relative;
     height: 100%;
-    background-color: #000000;
+    background-color: #A7CEA1;
     text-align: center;
     line-height: 50px;
-    color: white;
+    color: #000000;
     z-index: 1;
     width: 50%;
 }
 
 .ofertadas {
     height: 100%;
-    background-color: #6d6d6d;
+    background-color: #FFC999;
     text-align: center;
     line-height: 50px;
-    color: white;
+    color: #000000;
     z-index: 1;
     width: 50%;
 }

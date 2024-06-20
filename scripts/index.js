@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // acompanhar execucação no dev tools (pode remover)
     console.log(ocupButton)
 
-    //Pega a div que contém as skills
+    //Seleciona o elemento HTLM onde as skills irão ser exibidas
     const hardSkills = document.querySelector('#hard')
     // Limpa todas as vezes que selecionar uma nova ocupação
     hardSkills.innerHTML = ''
@@ -77,11 +77,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const campiButtons = document.querySelectorAll('#campi button')
   async function handleCampiButtonClick(event) {
+    // Ocupações
     const ocupacoesContainer = document.querySelector('#ocupacoes')
     ocupacoesContainer.innerHTML = ''
+    // Skills
     const hardSkills = document.querySelector('#hard')
     hardSkills.innerHTML = ''
+    // Top 5
+    const topOcup = document.querySelector('#top-ocup')
+    topOcup.innerHTML = ''
+    const topNocup = document.querySelector('#top-nocup')
+    topNocup.innerHTML = ''
 
+    // Preenche o termômetro de vagas ocupadas e não ocupadas
     const barOcupadas = document.querySelector('#bar-ocupadas')
     const barNocupadas = document.querySelector('#bar-nocupadas')
 
@@ -112,6 +120,28 @@ document.addEventListener('DOMContentLoaded', function () {
         <span class="item"><button id="${vaga}" data-campi-id="${campi.id}">${vaga}</button></span>
       `
       ocupacoesContainer.innerHTML += element
+
+    })
+
+    data.topOcup.forEach((ocup) => {
+      const element = `
+        <div class="top-ocup-item">
+          ${ocup['Ocupação']}
+          <span class="top-ocup-badge">${ocup['ocup_sum']}</span>
+        </div>
+      `
+      topOcup.innerHTML += element
+
+    })
+
+    data.topNocup.forEach((ocup) => {
+      const element = `
+        <div class="top-ocup-item">
+          ${ocup['Ocupação']}
+          <span class="top-nocup-badge">${ocup['ocup_sum']}</span>
+        </div>
+      `
+      topNocup.innerHTML += element
 
     })
 
