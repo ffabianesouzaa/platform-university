@@ -82,10 +82,9 @@
 
 .top5 {
     display: grid;
-    grid-gap: 8px;
+    grid-gap: 1px;
     padding: 16px 0;
-    grid-template-columns: repeat(2, 1fr);
-    
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .top5 h3 {
@@ -106,7 +105,7 @@
     height: 100%;
     background-color: #ffffff;
     text-decoration: none;
-    padding: 15px 26px;
+    padding: 15px 0px;
     position: relative;
     display: inline-block;
     border-radius: 2px;
@@ -114,6 +113,18 @@
     font-size: 13px;
   }
     
+  .top-ocup-item .top-ofert-badge {
+    position: right;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #c5c5c5;
+    color: #000000;
+    font-weight: 400;
+    font-size: 10px;
+  }
+
   .top-ocup-item .top-ocup-badge {
     position: right;
     top: -10px;

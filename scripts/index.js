@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(data)
 
     //Calculos
-    const total = data.ocupadas + data.nocupadas
+    const sumNocupadas = data.ofertadas - data.ocupadas
+    const total = data.ocupadas + sumNocupadas
     const percentageOcupadas = (data.ocupadas * 100) / total
     const percentageNocupadas = 100 - percentageOcupadas
 
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Preenche no HTML o valor
     barOcupadas.innerHTML = data.ocupadas
-    barNocupadas.innerHTML = data.nocupadas
+    barNocupadas.innerHTML = sumNocupadas
 
     // Mapeando os dados recebidos (data) e transforma em lista <li>
     hardSkills.innerHTML = data.hard.map((skill) => `<li>${skill}</li>`).join('');
@@ -84,10 +85,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const hardSkills = document.querySelector('#hard')
     hardSkills.innerHTML = ''
     // Top 5
-    const topOcup = document.querySelector('#top-ocup')
-    topOcup.innerHTML = ''
-    const topNocup = document.querySelector('#top-nocup')
-    topNocup.innerHTML = ''
+    const topOcupadas = document.querySelector('#top-ocup')
+    topOcupadas.innerHTML = ''
+    const topOfertadas = document.querySelector('#top-ofert')
+    topOfertadas.innerHTML = ''
+    const topNocupadas = document.querySelector('#top-nocup')
+    topNocupadas.innerHTML = ''
 
     // Preenche o termômetro de vagas ocupadas e não ocupadas
     const barOcupadas = document.querySelector('#bar-ocupadas')
@@ -123,6 +126,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
+    // Retorna o top 5 ofertadas e preenche na visualização
+    data.topOfert.forEach((ocup) => {
+      const element = `
+        <div class="top-ocup-item">
+          ${ocup['Ocupação']}
+          <span class="top-ofert-badge">${ocup['ofert_sum']}</span>
+        </div>
+      `
+      topOfertadas.innerHTML += element
+
+    })
+
     // Retorna o top 5 ocupadas e preenche na visualização
     data.topOcup.forEach((ocup) => {
       const element = `
@@ -131,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <span class="top-ocup-badge">${ocup['ocup_sum']}</span>
         </div>
       `
-      topOcup.innerHTML += element
+      topOcupadas.innerHTML += element
 
     })
 
@@ -140,14 +155,15 @@ document.addEventListener('DOMContentLoaded', function () {
       const element = `
         <div class="top-ocup-item">
           ${ocup['Ocupação']}
-          <span class="top-nocup-badge">${ocup['ocup_sum']}</span>
+          <span class="top-nocup-badge">${ocup['nocup_sum']}</span>
         </div>
       `
-      topNocup.innerHTML += element
+      topNocupadas.innerHTML += element
 
     })
 
-    const total = data.ocupadas + data.nocupadas
+    const sumNocupadas = data.ofertadas - data.ocupadas
+    const total = data.ocupadas + sumNocupadas
     const percentageOcupadas = (data.ocupadas * 100) / total
     const percentageNocupadas = 100 - percentageOcupadas
 
@@ -172,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
     barLabelNocupadas.style.width = `${percentageNocupadas}%`
 
     barOcupadas.innerHTML = data.ocupadas
-    barNocupadas.innerHTML = data.nocupadas
+    barNocupadas.innerHTML = sumNocupadas
 
     //Seleciona todos os botão de ocupação
     ocupButtons = document.querySelectorAll('#ocupacoes button')
