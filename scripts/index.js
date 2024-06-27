@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     data.topOfert.forEach((ocup) => {
       const element = `
         <div class="top-ocup-item">
-          ${ocup['Ocupação']}
+          ${ocup['Ocupacao']}
           <span class="top-ofert-badge">${ocup['ofert_sum']}</span>
         </div>
       `
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
     data.topOcup.forEach((ocup) => {
       const element = `
         <div class="top-ocup-item">
-          ${ocup['Ocupação']}
+          ${ocup['Ocupacao']}
           <span class="top-ocup-badge">${ocup['ocup_sum']}</span>
         </div>
       `
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
     data.topNocup.forEach((ocup) => {
       const element = `
         <div class="top-ocup-item">
-          ${ocup['Ocupação']}
+          ${ocup['Ocupacao']}
           <span class="top-nocup-badge">${ocup['nocup_sum']}</span>
         </div>
       `

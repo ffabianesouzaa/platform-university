@@ -15,64 +15,62 @@ app.add_middleware(
 # Consulta para preencher ocupações e termômetro de vagas de acordo com a cidade selecionada
 @app.get("/list/campi/ocup/{campi}")
 def list_campi_ocup(campi):
-    conn = sqlite3.connect('../db/dbthesis.db')
+    conn = sqlite3.connect('../db/platformdatabase.db')
     conn.row_factory = sqlite3.Row
     db = conn.cursor()
     
     # Seleciona a cidade e preenche as ocupações que tiveram pelo menos uma vaga ofertada
     rows = db.execute('''
-        SELECT Ocupação FROM Ofertadas WHERE Cidade = ? AND (Janeiro2022 > 0 OR Fevereiro2022 > 0
-        OR Março2022 > 0 OR Abril2022 > 0 OR Maio2022 > 0 OR Junho2022 > 0 OR Julho2022 > 0
-        OR Agosto2022 > 0 OR Setembro2022 > 0 OR Outubro2022 > 0 OR Novembro2022 > 0 OR Dezembro2022 > 0) 
+        SELECT Ocupacao FROM Ofertadas WHERE Cidade = ? AND Vaga > 0 
+        ORDER BY Ocupacao ASC
     ''', (campi,)).fetchall()
     resultsRows = [row[0] for row in rows]
     
     # Seleciona o total de vagas ocupadas da cidade selecionada (todas as ocupações)
     ocupadas = db.execute('''
-        SELECT SUM(Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 +
-        Julho2022 + Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022)
-        FROM Ocupadas WHERE Cidade = ? 
+        SELECT SUM(Vaga) FROM Ocupadas WHERE Cidade = ? 
     ''', (campi,)).fetchall()
     resultsOcupadas = ocupadas[0][0]
     
     # Seleciona o total de vagas não ocupadas da cidade selecionada (todas as ocupações)
     ofertadas = db.execute('''
-        SELECT SUM(Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 + Julho2022 +
-        Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022)
-        FROM Ofertadas WHERE Cidade = ? 
+        SELECT SUM(Vaga) FROM Ofertadas WHERE Cidade = ? 
     ''', (campi,)).fetchall()
     resultsOfertadas = ofertadas[0][0] # O resultado da primeira linha e coluna
     
-    #Seleciona as 5 maiores vagas ocupadas
-    topOcupadas = db.execute('''
-        SELECT Ocupação, (Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 + Julho2022 +
-        Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022) AS ocup_sum
-        FROM Ocupadas WHERE Cidade = ?
-        ORDER BY ocup_sum DESC LIMIT 5 
-    ''', (campi,)).fetchall()
-    resultsTopOcupadas = topOcupadas
-    
     #Seleciona as 5 maiores vagas ofertadas
     topOfertadas = db.execute('''
-        SELECT Ocupação, (Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 + Julho2022 +
-        Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022) AS ofert_sum
-        FROM Ofertadas WHERE Cidade = ?
-        ORDER BY ofert_sum DESC LIMIT 5 
+        SELECT Ocupacao, SUM(Vaga) AS ofert_sum FROM Ofertadas 
+        WHERE Cidade = ? AND Ano IN ("2022", "2023")
+        GROUP BY Ocupacao ORDER BY ofert_sum DESC LIMIT 5
     ''', (campi,)).fetchall()
     resultsTopOfertadas = topOfertadas
     
+    #Seleciona as 5 maiores vagas ocupadas
+    topOcupadas = db.execute('''
+        SELECT Ocupacao, SUM(Vaga) AS ocup_sum FROM Ocupadas 
+        WHERE Cidade = ? AND Ano IN ("2022", "2023")
+        GROUP BY Ocupacao ORDER BY ocup_sum DESC LIMIT 5 
+    ''', (campi,)).fetchall()
+    resultsTopOcupadas = topOcupadas
+    
     #Seleciona as 5 maiores vagas não ocupadas
     topNocupadas = db.execute('''
-        SELECT Ocupação, (Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 +
-        Julho2022 + Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022) -
-            (SELECT (Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 + Julho2022 +
-            Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022)
-        FROM Ocupadas OC
-        WHERE Cidade = O.Cidade AND Ocupação = O.Ocupação
-        ) AS nocup_sum
+        WITH vagas_totais AS (SELECT O.Ocupacao, SUM(O.Vaga) AS Vagas_Ofertadas,
+        COALESCE((SELECT SUM(OC.Vaga)
+            FROM Ocupadas OC
+            WHERE OC.Ocupacao = O.Ocupacao 
+              AND OC.Cidade = O.Cidade 
+              AND OC.Ano IN (2022, 2023)
+        ), 0) AS Vagas_Ocupadas
         FROM Ofertadas O
-        WHERE Cidade = ?
-        ORDER BY nocup_sum DESC LIMIT 5 
+        WHERE O.Cidade = ? AND O.Ano IN (2022, 2023)
+        GROUP BY O.Ocupacao
+        ), diferenca_vagas AS (SELECT Ocupacao, Vagas_Ofertadas - Vagas_Ocupadas AS nocup_sum
+        FROM vagas_totais)
+        SELECT Ocupacao, nocup_sum 
+        FROM diferenca_vagas
+        ORDER BY nocup_sum DESC LIMIT 5;
     ''', (campi,)).fetchall()
     resultsTopNocupadas = topNocupadas
     
@@ -91,29 +89,27 @@ def list_campi_ocup(campi):
 # Consulta para preencher termômetro de vagas e skills de acordo com a ocupação selecionada
 @app.get("/list/campi/ocup/total/{campi}/{ocupacoes}")
 def list_campi_ocup(campi, ocupacoes):
-    conn = sqlite3.connect('../db/dbthesis.db')
+    conn = sqlite3.connect('../db/platformdatabase.db')
     conn.row_factory = sqlite3.Row
     db = conn.cursor()
     
     # Seleciona o total de vagas ocupadas (todas as ocupações) da cidade e ocupação selecionadas
     ocupadas = db.execute('''
-        SELECT SUM(Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 + Julho2022 +
-        Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022)
-        FROM Ocupadas WHERE Cidade = ? AND Ocupação = ?
+        SELECT SUM(Vaga)
+        FROM Ocupadas WHERE Cidade = ? AND Ocupacao = ?
     ''', (campi, ocupacoes,)).fetchall()
     resultsOcupadas = ocupadas[0][0]
     
     # Seleciona o total de vagas não ocupadas (todas as ocupações) da cidade e ocupação selecionadas
     ofertadas = db.execute('''
-        SELECT SUM(Janeiro2022 + Fevereiro2022 + Março2022 + Abril2022 + Maio2022 + Junho2022 + Julho2022 +
-        Agosto2022 + Setembro2022 + Outubro2022 + Novembro2022 + Dezembro2022)
-        FROM Ofertadas WHERE Cidade = ? AND Ocupação = ?
+        SELECT SUM(Vaga)
+        FROM Ofertadas WHERE Cidade = ? AND Ocupacao = ?
     ''', (campi, ocupacoes)).fetchall()
     resultsOfertadas = ofertadas[0][0]
     
     # Seleciona as skills da ocupação selecionada
     hard = db.execute('''
-        SELECT DISTINCT DesHabilidade FROM Hard WHERE Ocupação = ?
+        SELECT DISTINCT Skill FROM Skills WHERE Ocupacao = ?
     ''', (ocupacoes,)).fetchall()
     resultsHard = [row[0] for row in hard]
         
