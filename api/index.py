@@ -15,7 +15,7 @@ app.add_middleware(
 # Consulta para preencher ocupações e termômetro de vagas de acordo com a cidade selecionada
 @app.get("/list/campi/ocup/{campi}")
 def list_campi_ocup(campi):
-    conn = sqlite3.connect('../db/dbthesis.db')
+    conn = sqlite3.connect('../db/platformdatabase.db')
     conn.row_factory = sqlite3.Row
     db = conn.cursor()
     
@@ -91,7 +91,7 @@ def list_campi_ocup(campi):
 # Consulta para preencher termômetro de vagas e skills de acordo com a ocupação selecionada
 @app.get("/list/campi/ocup/total/{campi}/{ocupacoes}")
 def list_campi_ocup(campi, ocupacoes):
-    conn = sqlite3.connect('../db/dbthesis.db')
+    conn = sqlite3.connect('../db/platformdatabase.db')
     conn.row_factory = sqlite3.Row
     db = conn.cursor()
     
