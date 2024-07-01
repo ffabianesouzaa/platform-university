@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const campiId = ocupButton.getAttribute('data-campi-id')
 
     // Chamada pra API (python) que retorna a quantidade de vagas ocupadas/nocupadas do banco de dados
-    const data = await fetch(`http://127.0.0.1:8000/list/campi/ocup/total/${campiId}/${ocupButton.id}/`, {
+    const data = await fetch(`https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/total/${campiId}/${ocupButton.id}/`, {
       method: 'GET'
     })
       .then((res) => res.json()) // sucesso > transforma em json
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     campi.classList.add('active')
     console.log(campi)
 
-    const data = await fetch('http://127.0.0.1:8000/list/campi/ocup/' + campi.id, {
+    const data = await fetch('https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/' + campi.id, {
       method: 'GET'
     })
       .then((res) => res.json())
