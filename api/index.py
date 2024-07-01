@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from typing import Union
 import sqlite3
 import json
 from fastapi.middleware.cors import CORSMiddleware
