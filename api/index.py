@@ -4,12 +4,11 @@ import sqlite3
 import json
 from fastapi.middleware.cors import CORSMiddleware
 
-# Verificar questões de segurança
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
+    allow_origins=["https://ffabianesouzaa.github.io/platform-university/index.html"],
+    allow_methods=["GET"],
     allow_headers=["*"],
 )
 
