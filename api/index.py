@@ -7,8 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ffabianesouzaa.github.io"],
-    allow_methods=["GET"],
+    allow_origins=["*"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -21,7 +21,7 @@ def list_campi_ocup(campi):
     
     # Seleciona a cidade e preenche as ocupações que tiveram pelo menos uma vaga ofertada
     rows = db.execute('''
-        SELECT Ocupacao FROM Ofertadas WHERE Cidade = ? AND Vaga > 0 
+        SELECT DISTINCT Ocupacao FROM Ofertadas WHERE Cidade = ? AND Vaga > 0 
         ORDER BY Ocupacao ASC
     ''', (campi,)).fetchall()
     resultsRows = [row[0] for row in rows]
@@ -107,11 +107,23 @@ def list_campi_ocup(campi, ocupacoes):
     ''', (campi, ocupacoes)).fetchall()
     resultsOfertadas = ofertadas[0][0]
     
-    # Seleciona as skills da ocupação selecionada
-    hard = db.execute('''
-        SELECT DISTINCT Skill FROM Skills WHERE Ocupacao = ?
+    # Seleciona as conhecimentos da ocupação selecionada
+    conhecimentos = db.execute('''
+        SELECT DISTINCT Conhecimento FROM Conhecimentos WHERE Ocupacao = ?
     ''', (ocupacoes,)).fetchall()
-    resultsHard = [row[0] for row in hard]
+    resultsConhecimentos = [row[0] for row in conhecimentos]
+    
+    # Seleciona as habilidades da ocupação selecionada
+    habilidades = db.execute('''
+        SELECT DISTINCT Habilidade FROM Habilidades WHERE Ocupacao = ?
+    ''', (ocupacoes,)).fetchall()
+    resultsHabilidades = [row[0] for row in habilidades]
+    
+    # Seleciona os atitudes da ocupação selecionada
+    atitudes = db.execute('''
+        SELECT DISTINCT Atitude FROM Atitudes WHERE Ocupacao = ?
+    ''', (ocupacoes,)).fetchall()
+    resultsAtitudes = [row[0] for row in atitudes]
         
     conn.commit()
     conn.close()
@@ -119,7 +131,9 @@ def list_campi_ocup(campi, ocupacoes):
     return {
         'ocupadas': resultsOcupadas,
         'ofertadas': resultsOfertadas,
-        'hard': resultsHard
+        'conhecimentos': resultsConhecimentos,
+        'habilidades': resultsHabilidades,
+        'atitudes': resultsAtitudes,
     }
 
 
