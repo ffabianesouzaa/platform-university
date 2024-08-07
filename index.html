@@ -30,6 +30,9 @@
 </style>
 
 <body>
+    <div id="loading-bar"></div>
+    <div id="content" style="display: none;">
+    </div>
     <script src="./scripts/index.js"></script>
     <div class="container">
         <div class="intro content">
@@ -88,13 +91,6 @@
                 </div>
             </div>
         </div>
-        <div class="ocupations content grey">
-            <h3>Explore as vagas de emprego e skills</h3>
-            <p>Selecione uma ocupação para visualizar mais detalhes.</p>
-            <div class="rectangle">
-                <div class="ocup" id="ocupacoes"></div>
-            </div>
-        </div>
         <div class="ocup-bar  content grey">
             <h3><strong>Termômetro de vagas de emprego</strong></h3>
             <p>As vagas ocupadas foram preenchidas, enquanto que as não ocupadas estavam em aberto
@@ -110,7 +106,15 @@
                 </div>
             </div>
         </div>
-        <div class="skills">
+        <div class="ocupations content">
+            <h3>Explore as vagas de emprego e skills</h3>
+            <p>Selecione uma ocupação para visualizar mais detalhes.</p>
+            <div class="rectangle">
+                <div class="ocup" id="ocupacoes"></div>
+            </div>
+        </div>
+        
+        <div class="skills content grey">
             <div class="skills-container">
                 <h3>Qualificações</h3>
                 <p>Conhecimentos, habilidades e atitudes relacionadas a essa ocupação.</p>

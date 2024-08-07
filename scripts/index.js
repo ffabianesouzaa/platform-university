@@ -38,13 +38,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Pega o ID do campi através do atributo data-campi-id
     const campiId = ocupButton.getAttribute('data-campi-id')
 
+    // Loading bar
+    const loadingBar = document.querySelector('#loading-bar')
+
     // Chamada pra API (python) que retorna a quantidade de vagas ocupadas/nocupadas do banco de dados
+    loadingBar.classList.add('loading')
     const data = await fetch(`http://127.0.0.1:8000/list/campi/ocup/total/${campiId}/${ocupButton.id}/`, {
       method: 'GET'
     })
       .then((res) => res.json()) // sucesso > transforma em json
-      .then((data) => data) // retorna o sucesso/dados da etapa anterior
-      .catch((error) => console.log(error)) // erro
+      .then((data) => {
+        loadingBar.classList.remove('loading')
+        return data
+      }) // retorna o sucesso/dados da etapa anterior
+      .catch((error) => {
+        loadingBar.classList.remove('loading')
+        console.log(error)
+      }) // erro
 
     console.log(data)
 
@@ -142,12 +152,22 @@ document.addEventListener('DOMContentLoaded', function () {
     campi.classList.add('active')
     console.log(campi)
 
+    // Loading bar
+    const loadingBar = document.querySelector('#loading-bar')
+
+    loadingBar.classList.add('loading')
     const data = await fetch('http://127.0.0.1:8000/list/campi/ocup/' + campi.id, {
       method: 'GET'
     })
       .then((res) => res.json())
-      .then((data) => data)
-      .catch((error) => console.log(error))
+      .then((data) => {
+        loadingBar.classList.remove('loading')
+        return data
+      }) // retorna o sucesso/dados da etapa anterior
+      .catch((error) => {
+        loadingBar.classList.remove('loading')
+        console.log(error)
+      }) 
 
     console.log(data)
 
