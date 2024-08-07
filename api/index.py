@@ -21,27 +21,27 @@ def list_campi_ocup(campi):
     
     # Seleciona a cidade e preenche as ocupações que tiveram pelo menos uma vaga ofertada
     rows = db.execute('''
-        SELECT Ocupacao FROM Ofertadas WHERE Cidade = ? AND Vaga > 0 
+        SELECT DISTINCT Ocupacao FROM Ofertadas WHERE Cidade = ? AND Ano = 2023 AND Vaga > 0 
         ORDER BY Ocupacao ASC
     ''', (campi,)).fetchall()
     resultsRows = [row[0] for row in rows]
     
     # Seleciona o total de vagas ocupadas da cidade selecionada (todas as ocupações)
     ocupadas = db.execute('''
-        SELECT SUM(Vaga) FROM Ocupadas WHERE Cidade = ? 
+        SELECT SUM(Vaga) FROM Ocupadas WHERE Ano = 2023 AND Cidade = ? 
     ''', (campi,)).fetchall()
     resultsOcupadas = ocupadas[0][0]
     
     # Seleciona o total de vagas não ocupadas da cidade selecionada (todas as ocupações)
     ofertadas = db.execute('''
-        SELECT SUM(Vaga) FROM Ofertadas WHERE Cidade = ? 
+        SELECT SUM(Vaga) FROM Ofertadas WHERE Ano = 2023 AND Cidade = ? 
     ''', (campi,)).fetchall()
     resultsOfertadas = ofertadas[0][0] # O resultado da primeira linha e coluna
     
     #Seleciona as 5 maiores vagas ofertadas
     topOfertadas = db.execute('''
         SELECT Ocupacao, SUM(Vaga) AS ofert_sum FROM Ofertadas 
-        WHERE Cidade = ? AND Ano IN ("2022", "2023")
+        WHERE Cidade = ? AND Ano IN ("2023")
         GROUP BY Ocupacao ORDER BY ofert_sum DESC LIMIT 5
     ''', (campi,)).fetchall()
     resultsTopOfertadas = topOfertadas
@@ -49,7 +49,7 @@ def list_campi_ocup(campi):
     #Seleciona as 5 maiores vagas ocupadas
     topOcupadas = db.execute('''
         SELECT Ocupacao, SUM(Vaga) AS ocup_sum FROM Ocupadas 
-        WHERE Cidade = ? AND Ano IN ("2022", "2023")
+        WHERE Cidade = ? AND Ano IN ("2023")
         GROUP BY Ocupacao ORDER BY ocup_sum DESC LIMIT 5 
     ''', (campi,)).fetchall()
     resultsTopOcupadas = topOcupadas
@@ -61,10 +61,10 @@ def list_campi_ocup(campi):
             FROM Ocupadas OC
             WHERE OC.Ocupacao = O.Ocupacao 
               AND OC.Cidade = O.Cidade 
-              AND OC.Ano IN (2022, 2023)
+              AND OC.Ano IN (2023)
         ), 0) AS Vagas_Ocupadas
         FROM Ofertadas O
-        WHERE O.Cidade = ? AND O.Ano IN (2022, 2023)
+        WHERE O.Cidade = ? AND O.Ano IN (2023)
         GROUP BY O.Ocupacao
         ), diferenca_vagas AS (SELECT Ocupacao, Vagas_Ofertadas - Vagas_Ocupadas AS nocup_sum
         FROM vagas_totais)
@@ -96,22 +96,34 @@ def list_campi_ocup(campi, ocupacoes):
     # Seleciona o total de vagas ocupadas (todas as ocupações) da cidade e ocupação selecionadas
     ocupadas = db.execute('''
         SELECT SUM(Vaga)
-        FROM Ocupadas WHERE Cidade = ? AND Ocupacao = ?
+        FROM Ocupadas WHERE Ano = 2023 AND Cidade = ? AND Ocupacao = ?
     ''', (campi, ocupacoes,)).fetchall()
     resultsOcupadas = ocupadas[0][0]
     
     # Seleciona o total de vagas não ocupadas (todas as ocupações) da cidade e ocupação selecionadas
     ofertadas = db.execute('''
         SELECT SUM(Vaga)
-        FROM Ofertadas WHERE Cidade = ? AND Ocupacao = ?
+        FROM Ofertadas WHERE Ano = 2023 AND Cidade = ? AND Ocupacao = ?
     ''', (campi, ocupacoes)).fetchall()
     resultsOfertadas = ofertadas[0][0]
     
-    # Seleciona as skills da ocupação selecionada
-    hard = db.execute('''
-        SELECT DISTINCT Skill FROM Skills WHERE Ocupacao = ?
+    # Seleciona as conhecimentos da ocupação selecionada
+    conhecimentos = db.execute('''
+        SELECT DISTINCT Conhecimento FROM Conhecimentos WHERE Ocupacao = ?
     ''', (ocupacoes,)).fetchall()
-    resultsHard = [row[0] for row in hard]
+    resultsConhecimentos = [row[0] for row in conhecimentos]
+    
+    # Seleciona as habilidades da ocupação selecionada
+    habilidades = db.execute('''
+        SELECT DISTINCT Habilidade FROM Habilidades WHERE Ocupacao = ?
+    ''', (ocupacoes,)).fetchall()
+    resultsHabilidades = [row[0] for row in habilidades]
+    
+    # Seleciona os atitudes da ocupação selecionada
+    atitudes = db.execute('''
+        SELECT DISTINCT Atitude FROM Atitudes WHERE Ocupacao = ?
+    ''', (ocupacoes,)).fetchall()
+    resultsAtitudes = [row[0] for row in atitudes]
         
     conn.commit()
     conn.close()
@@ -119,7 +131,9 @@ def list_campi_ocup(campi, ocupacoes):
     return {
         'ocupadas': resultsOcupadas,
         'ofertadas': resultsOfertadas,
-        'hard': resultsHard
+        'conhecimentos': resultsConhecimentos,
+        'habilidades': resultsHabilidades,
+        'atitudes': resultsAtitudes,
     }
 
 

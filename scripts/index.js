@@ -13,10 +13,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // acompanhar execucação no dev tools (pode remover)
     console.log(ocupButton)
 
-    //Seleciona o elemento HTLM onde as skills irão ser exibidas
-    const hardSkills = document.querySelector('#hard')
+    //Seleciona o elemento HTLM onde os conhecimento serão exibidos
+    const conhecimentosSkills = document.querySelector('#conhecimentos')
     // Limpa todas as vezes que selecionar uma nova ocupação
-    hardSkills.innerHTML = ''
+    conhecimentosSkills.innerHTML = ''
+
+    //Seleciona o elemento HTLM onde as habilidades serão exibidas
+    const habilidadesSkills = document.querySelector('#habilidades')
+    // Limpa todas as vezes que selecionar uma nova ocupação
+    habilidadesSkills.innerHTML = ''
+
+    //Seleciona o elemento HTLM onde as atitudes serão exibidas
+    const atitudesSkills = document.querySelector('#atitudes')
+    // Limpa todas as vezes que selecionar uma nova ocupação
+    atitudesSkills.innerHTML = ''
 
     //Pegando um elemento no html (querySelector)
     const barOcupadas = document.querySelector('#bar-ocupadas')
@@ -28,13 +38,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Pega o ID do campi através do atributo data-campi-id
     const campiId = ocupButton.getAttribute('data-campi-id')
 
+    // Loading bar
+    const loadingBar = document.querySelector('#loading-bar')
+
     // Chamada pra API (python) que retorna a quantidade de vagas ocupadas/nocupadas do banco de dados
+    loadingBar.classList.add('loading')
     const data = await fetch(`https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/total/${campiId}/${ocupButton.id}/`, {
       method: 'GET'
     })
       .then((res) => res.json()) // sucesso > transforma em json
-      .then((data) => data) // retorna o sucesso/dados da etapa anterior
-      .catch((error) => console.log(error)) // erro
+      .then((data) => {
+        loadingBar.classList.remove('loading')
+        return data
+      }) // retorna o sucesso/dados da etapa anterior
+      .catch((error) => {
+        loadingBar.classList.remove('loading')
+        console.log(error)
+      }) // erro
 
     console.log(data)
 
@@ -72,7 +92,26 @@ document.addEventListener('DOMContentLoaded', function () {
     barNocupadas.innerHTML = sumNocupadas
 
     // Mapeando os dados recebidos (data) e transforma em lista <li>
-    hardSkills.innerHTML = data.hard.map((skill) => `<li>${skill}</li>`).join('');
+    if (data.conhecimentos && data.conhecimentos.length > 0) {
+      conhecimentosSkills.innerHTML = data.conhecimentos.map((conhecimento) => `<li>${conhecimento}</li>`).join('');
+    } else {
+      conhecimentosSkills.innerHTML = '<p>Nenhum conhecimento relacionado.</p>';
+    }
+    
+    // Mapeando os dados recebidos (data) e transforma em lista <li>
+    if (data.habilidades && data.habilidades.length > 0) {
+      habilidadesSkills.innerHTML = data.habilidades.map((habilidade) => `<li>${habilidade}</li>`).join('');
+    } else {
+      habilidadesSkills.innerHTML = '<p>Nenhuma habilidade relacionada.</p>';
+    }
+
+    // Mapeando os dados recebidos (data) e transforma em lista <li>
+    
+    if (data.atitudes && data.atitudes.length > 0) {
+      atitudesSkills.innerHTML = data.atitudes.map((atitude) => `<li>${atitude}</li>`).join('');
+    } else {
+      atitudesSkills.innerHTML = '<p>Nenhuma atitude relacionada.</p>';
+    }
 
   }
 
@@ -82,8 +121,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const ocupacoesContainer = document.querySelector('#ocupacoes')
     ocupacoesContainer.innerHTML = ''
     // Skills
-    const hardSkills = document.querySelector('#hard')
-    hardSkills.innerHTML = ''
+    const conhecimentosSkills = document.querySelector('#conhecimentos')
+    conhecimentosSkills.innerHTML = ''
+    const habilidadesSkills = document.querySelector('#habilidades')
+    habilidadesSkills.innerHTML = ''
+    const atitudesSkills = document.querySelector('#atitudes')
+    atitudesSkills.innerHTML = ''
     // Top 5
     const topOcupadas = document.querySelector('#top-ocup')
     topOcupadas.innerHTML = ''
@@ -109,12 +152,22 @@ document.addEventListener('DOMContentLoaded', function () {
     campi.classList.add('active')
     console.log(campi)
 
+    // Loading bar
+    const loadingBar = document.querySelector('#loading-bar')
+
+    loadingBar.classList.add('loading')
     const data = await fetch('https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/' + campi.id, {
       method: 'GET'
     })
       .then((res) => res.json())
-      .then((data) => data)
-      .catch((error) => console.log(error))
+      .then((data) => {
+        loadingBar.classList.remove('loading')
+        return data
+      }) // retorna o sucesso/dados da etapa anterior
+      .catch((error) => {
+        loadingBar.classList.remove('loading')
+        console.log(error)
+      }) 
 
     console.log(data)
 

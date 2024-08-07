@@ -30,6 +30,9 @@
 </style>
 
 <body>
+    <div id="loading-bar"></div>
+    <div id="content" style="display: none;">
+    </div>
     <script src="./scripts/index.js"></script>
     <div class="container">
         <div class="intro content">
@@ -88,13 +91,6 @@
                 </div>
             </div>
         </div>
-        <div class="ocupations content grey">
-            <h3>Explore as vagas de emprego e skills</h3>
-            <p>Selecione uma ocupação para visualizar mais detalhes.</p>
-            <div class="rectangle">
-                <div class="ocup" id="ocupacoes"></div>
-            </div>
-        </div>
         <div class="ocup-bar  content grey">
             <h3><strong>Termômetro de vagas de emprego</strong></h3>
             <p>As vagas ocupadas foram preenchidas, enquanto que as não ocupadas estavam em aberto
@@ -110,16 +106,33 @@
                 </div>
             </div>
         </div>
-        <div class="skills">
+        <div class="ocupations content">
+            <h3>Explore as vagas de emprego e skills</h3>
+            <p>Selecione uma ocupação para visualizar mais detalhes.</p>
+            <div class="rectangle">
+                <div class="ocup" id="ocupacoes"></div>
+            </div>
+        </div>
+        
+        <div class="skills content grey">
             <div class="skills-container">
-                <h3>Skills</h3>
-                <p>Algumas skills relacionadas a essa ocupação.</p>
-                <div class="description" id="hard">
+                <h3>Qualificações</h3>
+                <p>Conhecimentos, habilidades e atitudes relacionadas a essa ocupação.</p>
+                <h5>Conhecimentos</h5>
+                <div class="description" id="conhecimentos">
+                    <ul></ul>
+                </div>
+                <h5>Habilidades</h5>
+                <div class="description" id="habilidades">
+                    <ul></ul>
+                </div>
+                <h5>Atitudes</h5>
+                <div class="description" id="atitudes">
                     <ul></ul>
                 </div>
             </div>
         </div>
-        <footer>Dados utilizados nesse plataforma foram obtidos através
+        <footer>Dados utilizados nesta plataforma foram obtidos através
             <a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm" target="_blank">
                 Lei de Acesso à Informação (LAI)</a>, por meio do portal <a href="https://falabr.cgu.gov.br/web/home"
                 target="_blank">Fala.br</a> e no <a href="https://qbqconsulta.fipe.org.br/"
