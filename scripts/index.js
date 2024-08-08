@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Chamada pra API (python) que retorna a quantidade de vagas ocupadas/nocupadas do banco de dados
     loadingBar.classList.add('loading')
-    const data = await fetch(`https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/total/${campiId}/${ocupButton.id}/`, {
+    const encodedURL = encodeURI(`https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/total/${campiId}/${ocupButton.id}/`)
+    const data = await fetch(encodedURL, {
       method: 'GET'
     })
       .then((res) => res.json()) // sucesso > transforma em json
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       conhecimentosSkills.innerHTML = '<p>Nenhum conhecimento relacionado.</p>';
     }
-    
+
     // Mapeando os dados recebidos (data) e transforma em lista <li>
     if (data.habilidades && data.habilidades.length > 0) {
       habilidadesSkills.innerHTML = data.habilidades.map((habilidade) => `<li>${habilidade}</li>`).join('');
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Mapeando os dados recebidos (data) e transforma em lista <li>
-    
+
     if (data.atitudes && data.atitudes.length > 0) {
       atitudesSkills.innerHTML = data.atitudes.map((atitude) => `<li>${atitude}</li>`).join('');
     } else {
@@ -156,7 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadingBar = document.querySelector('#loading-bar')
 
     loadingBar.classList.add('loading')
-    const data = await fetch('https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/' + campi.id, {
+    const encodedURL = encodeURI('https://live-ann-marie-platform-e36f4797.koyeb.app/list/campi/ocup/' + campi.id)
+    const data = await fetch(encodedURL, {
       method: 'GET'
     })
       .then((res) => res.json())
@@ -167,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch((error) => {
         loadingBar.classList.remove('loading')
         console.log(error)
-      }) 
+      })
 
     console.log(data)
 
