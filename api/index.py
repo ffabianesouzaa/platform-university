@@ -21,20 +21,20 @@ def list_campi_ocup(campi):
     
     # Seleciona a cidade e preenche as ocupações que tiveram pelo menos uma vaga ofertada
     rows = db.execute('''
-        SELECT DISTINCT Ocupacao FROM Ofertadas WHERE Cidade = ? AND Ano = 2023 AND Vaga > 0 
+        SELECT DISTINCT Ocupacao FROM Ofertadas WHERE Cidade = ? AND Vaga > 0 
         ORDER BY Ocupacao ASC
     ''', (campi,)).fetchall()
     resultsRows = [row[0] for row in rows]
     
     # Seleciona o total de vagas ocupadas da cidade selecionada (todas as ocupações)
     ocupadas = db.execute('''
-        SELECT SUM(Vaga) FROM Ocupadas WHERE Ano = 2023 AND Cidade = ? 
+        SELECT SUM(Vaga) FROM Ocupadas WHERE Cidade = ? 
     ''', (campi,)).fetchall()
     resultsOcupadas = ocupadas[0][0]
     
     # Seleciona o total de vagas não ocupadas da cidade selecionada (todas as ocupações)
     ofertadas = db.execute('''
-        SELECT SUM(Vaga) FROM Ofertadas WHERE Ano = 2023 AND Cidade = ? 
+        SELECT SUM(Vaga) FROM Ofertadas WHERE Cidade = ? 
     ''', (campi,)).fetchall()
     resultsOfertadas = ofertadas[0][0] # O resultado da primeira linha e coluna
     
@@ -96,14 +96,14 @@ def list_campi_ocup(campi, ocupacoes):
     # Seleciona o total de vagas ocupadas (todas as ocupações) da cidade e ocupação selecionadas
     ocupadas = db.execute('''
         SELECT SUM(Vaga)
-        FROM Ocupadas WHERE Ano = 2023 AND Cidade = ? AND Ocupacao = ?
+        FROM Ocupadas WHERE Cidade = ? AND Ocupacao = ?
     ''', (campi, ocupacoes,)).fetchall()
     resultsOcupadas = ocupadas[0][0]
     
     # Seleciona o total de vagas não ocupadas (todas as ocupações) da cidade e ocupação selecionadas
     ofertadas = db.execute('''
         SELECT SUM(Vaga)
-        FROM Ofertadas WHERE Ano = 2023 AND Cidade = ? AND Ocupacao = ?
+        FROM Ofertadas WHERE Cidade = ? AND Ocupacao = ?
     ''', (campi, ocupacoes)).fetchall()
     resultsOfertadas = ofertadas[0][0]
     
