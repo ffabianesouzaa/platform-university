@@ -41,7 +41,7 @@ def list_campi_ocup(campi):
     #Seleciona as 5 maiores vagas ofertadas
     topOfertadas = db.execute('''
         SELECT Ocupacao, SUM(Vaga) AS ofert_sum FROM Ofertadas 
-        WHERE Cidade = ? AND Ano IN ("2023")
+        WHERE Cidade = ?
         GROUP BY Ocupacao ORDER BY ofert_sum DESC LIMIT 5
     ''', (campi,)).fetchall()
     resultsTopOfertadas = topOfertadas
@@ -49,7 +49,7 @@ def list_campi_ocup(campi):
     #Seleciona as 5 maiores vagas ocupadas
     topOcupadas = db.execute('''
         SELECT Ocupacao, SUM(Vaga) AS ocup_sum FROM Ocupadas 
-        WHERE Cidade = ? AND Ano IN ("2023")
+        WHERE Cidade = ?
         GROUP BY Ocupacao ORDER BY ocup_sum DESC LIMIT 5 
     ''', (campi,)).fetchall()
     resultsTopOcupadas = topOcupadas
@@ -61,10 +61,9 @@ def list_campi_ocup(campi):
             FROM Ocupadas OC
             WHERE OC.Ocupacao = O.Ocupacao 
               AND OC.Cidade = O.Cidade 
-              AND OC.Ano IN (2023)
         ), 0) AS Vagas_Ocupadas
         FROM Ofertadas O
-        WHERE O.Cidade = ? AND O.Ano IN (2023)
+        WHERE O.Cidade = ?
         GROUP BY O.Ocupacao
         ), diferenca_vagas AS (SELECT Ocupacao, Vagas_Ofertadas - Vagas_Ocupadas AS nocup_sum
         FROM vagas_totais)
